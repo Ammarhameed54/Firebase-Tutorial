@@ -38,7 +38,7 @@ class _loginpageState extends State<loginpage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  "assets/images/loginpic.png",
+                  "assets/images/login.jpg",
                   width: 150,
                   height: 150,
                 ),

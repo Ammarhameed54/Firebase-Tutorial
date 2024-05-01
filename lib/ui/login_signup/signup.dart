@@ -45,7 +45,7 @@ class _signupState extends State<signup> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/loginpic.png",
+                    "assets/images/signup.jpg",
                     width: 150,
                     height: 150,
                   ),
