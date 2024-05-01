@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
-  const Button({super.key, required this.label, required this.press});
+  const Button(
+      {super.key,
+      required this.label,
+      required this.press,
+      this.loading = false});
+  final bool loading;
   final String label;
   final VoidCallback press;
 
@@ -18,10 +23,15 @@ class Button extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: press,
-        child: Text(
-          label,
-          style: const TextStyle(color: Colors.white),
-        ),
+        child: loading
+            ? CircularProgressIndicator(
+                strokeWidth: 4,
+                color: Colors.white,
+              )
+            : Text(
+                label,
+                style: const TextStyle(color: Colors.white),
+              ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorial/ui/buttons/buttons.dart';
 import 'package:firebase_tutorial/ui/login_signup/login.dart';
+import 'package:firebase_tutorial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class signup extends StatefulWidget {
@@ -11,6 +12,7 @@ class signup extends StatefulWidget {
 }
 
 class _signupState extends State<signup> {
+  bool loading = false;
   final _formkey = GlobalKey<FormState>();
   final emailcontroller = TextEditingController();
   final passcontroller = TextEditingController();
@@ -111,12 +113,27 @@ class _signupState extends State<signup> {
                     height: 10,
                   ),
                   Button(
+                      loading: loading,
                       label: "SignUp",
                       press: () {
                         if (_formkey.currentState!.validate()) {
-                          _auth.createUserWithEmailAndPassword(
-                              email: emailcontroller.text.toString(),
-                              password: passcontroller.text.toString());
+                          setState(() {
+                            loading = true;
+                          });
+                          _auth
+                              .createUserWithEmailAndPassword(
+                                  email: emailcontroller.text.toString(),
+                                  password: passcontroller.text.toString())
+                              .then((value) {
+                            setState(() {
+                              loading = false;
+                            });
+                          }).onError((error, stackTrace) {
+                            utils().ToastMesaage(error.toString());
+                            setState(() {
+                              loading = false;
+                            });
+                          });
                         }
                         emailcontroller.clear();
                         passcontroller.clear();
