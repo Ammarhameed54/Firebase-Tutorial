@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorial/ui/buttons/buttons.dart';
 import 'package:firebase_tutorial/ui/login_signup/login.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class _signupState extends State<signup> {
   final passcontroller = TextEditingController();
 
   // FirebaseAuthWeb _authWeb = FirebaseAuthWeb.instance;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -111,11 +114,12 @@ class _signupState extends State<signup> {
                       label: "SignUp",
                       press: () {
                         if (_formkey.currentState!.validate()) {
-                          // FirebaseAuthWeb.instance
-                          //     .createUserWithEmailAndPassword(
-                          //         emailcontroller.text.toString(),
-                          //         passcontroller.text.toString());
+                          _auth.createUserWithEmailAndPassword(
+                              email: emailcontroller.text.toString(),
+                              password: passcontroller.text.toString());
                         }
+                        emailcontroller.clear();
+                        passcontroller.clear();
                       }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
