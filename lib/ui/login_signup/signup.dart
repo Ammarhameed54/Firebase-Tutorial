@@ -14,6 +14,8 @@ class _signupState extends State<signup> {
   final emailcontroller = TextEditingController();
   final passcontroller = TextEditingController();
 
+  // FirebaseAuthWeb _authWeb = FirebaseAuthWeb.instance;
+
   @override
   void dispose() {
     emailcontroller;
@@ -108,7 +110,12 @@ class _signupState extends State<signup> {
                   Button(
                       label: "SignUp",
                       press: () {
-                        if (_formkey.currentState!.validate()) {}
+                        if (_formkey.currentState!.validate()) {
+                          // FirebaseAuthWeb.instance
+                          //     .createUserWithEmailAndPassword(
+                          //         emailcontroller.text.toString(),
+                          //         passcontroller.text.toString());
+                        }
                       }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
