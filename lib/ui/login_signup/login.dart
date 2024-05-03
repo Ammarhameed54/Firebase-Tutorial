@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorial/ui/buttons/buttons.dart';
 import 'package:firebase_tutorial/ui/login_signup/signup.dart';
+import 'package:firebase_tutorial/ui/posts/posts.dart';
+import 'package:firebase_tutorial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class loginpage extends StatefulWidget {
@@ -10,10 +13,12 @@ class loginpage extends StatefulWidget {
 }
 
 class _loginpageState extends State<loginpage> {
+  bool loading = false;
   final _formkey = GlobalKey<FormState>();
   final emailcontroller = TextEditingController();
   final passcontroller = TextEditingController();
 
+  final _auth = FirebaseAuth.instance;
   @override
   void dispose() {
     emailcontroller;
@@ -107,8 +112,35 @@ class _loginpageState extends State<loginpage> {
                 ),
                 Button(
                     label: "Login",
+                    loading: loading,
                     press: () {
-                      if (_formkey.currentState!.validate()) {}
+                      if (_formkey.currentState!.validate()) {
+                        setState(() {
+                          loading = true;
+                        });
+                        _auth
+                            .signInWithEmailAndPassword(
+                                email: emailcontroller.text,
+                                password: passcontroller.text.toString())
+                            .then((value) {
+                          utils().ToastMesaage(value.user!.email.toString());
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => postScreen()));
+
+                          setState(() {
+                            loading = false;
+                          });
+                        }).onError((error, stackTrace) {
+                          debugPrint(error.toString());
+                          utils().ToastMesaage(error.toString());
+                          setState(() {
+                            loading = false;
+                          });
+                        });
+                      }
                     }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
