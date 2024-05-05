@@ -1,23 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorial/ui/buttons/buttons.dart';
 import 'package:firebase_tutorial/ui/login_signup/login.dart';
-import 'package:firebase_tutorial/Utils/utils.dart';
+import 'package:firebase_tutorial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+class signup extends StatefulWidget {
+  const signup({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  State<signup> createState() => _signupState();
 }
 
-class _SignupState extends State<Signup> {
+class _signupState extends State<signup> {
   bool loading = false;
   final _formkey = GlobalKey<FormState>();
   final emailcontroller = TextEditingController();
   final passcontroller = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // FirebaseAuthWeb _authWeb = FirebaseAuthWeb.instance;
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -26,7 +28,6 @@ class _SignupState extends State<Signup> {
     super.dispose();
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -128,7 +129,7 @@ class _SignupState extends State<Signup> {
                               loading = false;
                             });
                           }).onError((error, stackTrace) {
-                            Utils().ToastMesaage(error.toString());
+                            utils().ToastMesaage(error.toString());
                             setState(() {
                               loading = false;
                             });
@@ -147,7 +148,7 @@ class _SignupState extends State<Signup> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Loginpage()));
+                                    builder: (context) => loginpage()));
                           },
                           child: const Text(
                             "Login",

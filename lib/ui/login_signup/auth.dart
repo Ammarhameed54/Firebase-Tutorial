@@ -3,8 +3,8 @@ import 'package:firebase_tutorial/ui/login_signup/login.dart';
 import 'package:firebase_tutorial/ui/login_signup/signup.dart';
 import 'package:flutter/material.dart';
 
-class Authpage extends StatelessWidget {
-  const Authpage({super.key});
+class authpage extends StatelessWidget {
+  const authpage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class Authpage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Loginpage()));
+                              builder: (context) => const loginpage()));
                     }),
                 Button(
                     label: "Sign Up",
@@ -45,7 +45,7 @@ class Authpage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Signup()));
+                              builder: (context) => const signup()));
                     }),
               ],
             ),
