@@ -3,14 +3,14 @@ import 'package:firebase_tutorial/ui/login_signup/login.dart';
 import 'package:firebase_tutorial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class postScreen extends StatefulWidget {
-  const postScreen({super.key});
+class PostScreen extends StatefulWidget {
+  const PostScreen({super.key});
 
   @override
-  State<postScreen> createState() => _postScreenState();
+  State<PostScreen> createState() => _PostScreenState();
 }
 
-class _postScreenState extends State<postScreen> {
+class _PostScreenState extends State<PostScreen> {
   final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -23,9 +23,9 @@ class _postScreenState extends State<postScreen> {
             onPressed: () {
               auth.signOut().then((value) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => loginpage()));
+                    MaterialPageRoute(builder: (context) => const Loginpage()));
               }).onError((error, stackTrace) {
-                utils().ToastMesaage(error.toString());
+                Utils().toastMesaage(error.toString());
               });
             },
             icon: const Icon(Icons.logout),

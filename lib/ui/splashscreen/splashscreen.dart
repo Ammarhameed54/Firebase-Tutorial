@@ -4,28 +4,28 @@ import 'package:firebase_tutorial/ui/posts/posts.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class splashScreen extends StatefulWidget {
-  const splashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashScreen> createState() => _splashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashScreenState extends State<splashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     final auth = FirebaseAuth.instance;
-    final User = auth.currentUser;
-    if (User != null) {
+    final user = auth.currentUser;
+    if (user != null) {
       Future.delayed(
           const Duration(seconds: 5),
           () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const postScreen())));
+              MaterialPageRoute(builder: (context) => const PostScreen())));
     } else {
       Future.delayed(
           const Duration(seconds: 5),
           () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const authpage())));
+              MaterialPageRoute(builder: (context) => const Authpage())));
     }
 
     super.initState();

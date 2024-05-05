@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorial/ui/buttons/buttons.dart';
 import 'package:firebase_tutorial/ui/login_signup/signup.dart';
+import 'package:firebase_tutorial/Utils/utils.dart';
 import 'package:firebase_tutorial/ui/posts/posts.dart';
-import 'package:firebase_tutorial/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class loginpage extends StatefulWidget {
-  const loginpage({super.key});
+class Loginpage extends StatefulWidget {
+  const Loginpage({super.key});
 
   @override
-  State<loginpage> createState() => _loginpageState();
+  State<Loginpage> createState() => _LoginpageState();
 }
 
-class _loginpageState extends State<loginpage> {
+class _LoginpageState extends State<Loginpage> {
   bool loading = false;
   final _formkey = GlobalKey<FormState>();
   final emailcontroller = TextEditingController();
@@ -26,6 +26,7 @@ class _loginpageState extends State<loginpage> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -44,8 +45,8 @@ class _loginpageState extends State<loginpage> {
               children: [
                 Image.asset(
                   "assets/images/login.jpg",
-                  width: 150,
-                  height: 150,
+                  width: 100,
+                  height: 100,
                 ),
                 const SizedBox(
                   height: 20,
@@ -123,19 +124,19 @@ class _loginpageState extends State<loginpage> {
                                 email: emailcontroller.text,
                                 password: passcontroller.text.toString())
                             .then((value) {
-                          utils().ToastMesaage(value.user!.email.toString());
+                          Utils().ToastMesaage(value.user!.email.toString());
 
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => postScreen()));
+                                  builder: (context) => const PostScreen()));
 
                           setState(() {
                             loading = false;
                           });
                         }).onError((error, stackTrace) {
                           debugPrint(error.toString());
-                          utils().ToastMesaage(error.toString());
+                          Utils().ToastMesaage(error.toString());
                           setState(() {
                             loading = false;
                           });
@@ -152,14 +153,24 @@ class _loginpageState extends State<loginpage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => signup()));
+                                  builder: (context) => const Signup()));
                         },
                         child: const Text(
                           "SignUp",
                           style: TextStyle(
                               color: Colors.blue, fontWeight: FontWeight.bold),
-                        ))
+                        )),
                   ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: Colors.black)),
+                  child: const Center(child: Text("Login With Phone Number")),
                 )
               ],
             ),
