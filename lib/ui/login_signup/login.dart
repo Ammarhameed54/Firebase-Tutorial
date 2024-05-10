@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_tutorial/ui/buttons/buttons.dart';
+import 'package:firebase_tutorial/ui/login_signup/login_with_number.dart';
 import 'package:firebase_tutorial/ui/login_signup/signup.dart';
 import 'package:firebase_tutorial/ui/posts/posts.dart';
 import 'package:firebase_tutorial/utils/utils.dart';
@@ -35,7 +36,7 @@ class _loginpageState extends State<loginpage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+          padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
           child: Form(
             key: _formkey,
             child: Column(
@@ -164,12 +165,18 @@ class _loginpageState extends State<loginpage> {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.black)),
-                  child: Center(child: Text("Login With Phone Number")),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => LoginWIthNumber()));
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(color: Colors.black)),
+                    child: Center(child: Text("Login With Phone Number")),
+                  ),
                 )
               ],
             ),
